@@ -14,7 +14,8 @@ public abstract class EntityDao <T extends GenericEntity> {
 	}
 	public T save(T entity){
 		em.getTransaction().begin();
-		em.persist(entity);
+		//em.persist(entity);
+		em.merge(entity);
 		em.getTransaction().commit();
 		return entity;
 	}

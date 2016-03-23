@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -53,6 +54,9 @@ public class SurveyQuestion extends GenericEntity{
 
 	@OneToMany(mappedBy="surveyQuestion")
     private Collection<SurveyContent> surveyContents = new ArrayList<SurveyContent>();
+	
+	@OneToMany(mappedBy="surveyQuestion", cascade = { CascadeType.PERSIST, CascadeType.ALL })
+	private Collection<QuestionOption> questionOptions = new ArrayList<QuestionOption>();
 	   
 	public long getQuestionId() {
 		return questionId;
@@ -117,5 +121,14 @@ public class SurveyQuestion extends GenericEntity{
 	public void setSurveyContents(Collection<SurveyContent> surveyContents) {
 		this.surveyContents = surveyContents;
 	}
+
+	public Collection<QuestionOption> getQuestionOptions() {
+		return questionOptions;
+	}
+
+	public void setQuestionOptions(Collection<QuestionOption> questionOptions) {
+		this.questionOptions = questionOptions;
+	}
+	
 	
 }

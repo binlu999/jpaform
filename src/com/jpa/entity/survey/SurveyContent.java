@@ -1,6 +1,5 @@
 package com.jpa.entity.survey;
 
-import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.CascadeType;
@@ -47,7 +46,7 @@ public class SurveyContent extends GenericEntity {
 	@ManyToOne(cascade={CascadeType.PERSIST,CascadeType.ALL})
 	@JoinColumn(name = "QUESTION_ID")
 	SurveyQuestion surveyQuestion;
-
+	
 	public long getSurveyFormId() {
 		return surveyFormId;
 	}

@@ -4,6 +4,7 @@ import java.util.Collection;
 
 import org.apache.commons.lang.StringUtils;
 
+import com.jpa.entity.survey.QuestionOption;
 import com.jpa.entity.survey.SurveyContent;
 import com.jpa.entity.survey.SurveyForm;
 import com.jpa.entity.survey.SurveyQuestion;
@@ -12,12 +13,21 @@ public class EntityTestRunner {
 
 	public static void main(String[] args) throws InstantiationException,
 			IllegalAccessException {
+		QuestionOptionTest test=new QuestionOptionTest();
+		//test.testAssignToQuestion();
+ 
 		//testCreateContent();
+		
 		SurveyFormTest formTest = new SurveyFormTest();
-		SurveyForm form = formTest.find(5301);
+		SurveyForm form = formTest.find(6401);
 		Collection<SurveyContent> contents = form.getSurveyContents();
+		for(SurveyContent content:contents){
+			SurveyQuestion q = content.getSurveyQuestion();
+			Collection<QuestionOption> options = q.getQuestionOptions();
+			assert(options.size()>0);
+		}
 		assert(contents.size()>0);
-
+	
 	}
 
 	static void testCreateContent() throws InstantiationException,
@@ -25,6 +35,7 @@ public class EntityTestRunner {
 		SurveyFormTest formTest = new SurveyFormTest();
 		SurveyQuestionTest questionTest = new SurveyQuestionTest();
 		SurveyContentTest contentTest = new SurveyContentTest();
+		QuestionOptionTest questionOptionTest=new QuestionOptionTest();
 
 		SurveyForm form = formTest.creatOne();
 		SurveyQuestion question = questionTest.creatOne();
@@ -32,6 +43,9 @@ public class EntityTestRunner {
 		SurveyContent content = contentTest.creatOne();
 		content.setSurveyForm(form);
 		content.setSurveyQuestion(question);
+		
+		QuestionOption questionOption = questionOptionTest.creatOne();
+		question.getQuestionOptions().add(questionOption);
 
 		SurveyContent newContent = contentTest.save(content);
 		newContent = contentTest.merge(newContent);

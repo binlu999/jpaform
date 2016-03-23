@@ -11,6 +11,8 @@
 		<class>com.jpa.entity.survey.SurveyForm</class>
 		<class>com.jpa.entity.survey.SurveyQuestion</class>
 		<class>com.jpa.entity.survey.SurveyContent</class>
+		<class>com.jpa.entity.survey.QuestionOption</class>
+		
 			  	
 		
 		<!-- <properties> <property name="javax.persistence.jdbc.driver" value="com.microsoft.sqlserver.jdbc.SQLServerDriver" 
@@ -25,7 +27,7 @@
 		<properties>
 			<property name="openjpa.ConnectionDriverName" value="com.microsoft.sqlserver.jdbc.SQLServerDriver" />
 			<property name="openjpa.ConnectionURL"
-				value="jdbc:sqlserver://txhous10pc691:59871;databaseName=anico" />
+				value="jdbc:sqlserver://10.241.38.18:59871;databaseName=anico" />
 			<property name="openjpa.ConnectionUserName" value="sa" />
 			<property name="openjpa.ConnectionPassword" value="wifecao911" />
 			<property name="openjpa.Multithreaded" value="true" />
