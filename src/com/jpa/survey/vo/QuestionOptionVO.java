@@ -50,8 +50,6 @@ public class QuestionOptionVO {
 
 	public void setTriggerQuestionVO(SurveyQuestionVO triggerQuestionVO) {
 		this.triggerQuestionVO = triggerQuestionVO;
-	}
-	
-	
+	}	
 
 }

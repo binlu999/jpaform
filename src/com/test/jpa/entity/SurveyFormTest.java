@@ -1,10 +1,12 @@
 package com.test.jpa.entity;
 
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
 import com.jpa.survey.dao.SurveyFormDao;
 import com.jpa.survey.entity.SurveyForm;
+import com.jpa.survey.file.SurveyFormFileExporter;
 
 public class SurveyFormTest extends GenericTest<SurveyFormDao, SurveyForm> {
 
@@ -28,5 +30,14 @@ public class SurveyFormTest extends GenericTest<SurveyFormDao, SurveyForm> {
 
 	public void testFindAll(){
 		List<SurveyForm> forms = this.dao.findAll();
+	}
+	
+	public void testExport(){
+		SurveyFormFileExporter exporter=new SurveyFormFileExporter();
+		try {
+			exporter.export("c:\\tmp\\survey");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }
