@@ -1,0 +1,22 @@
+{
+  "companyCode": "101",
+  "marketArea": "MLM",
+  "prodCode": "Life",
+  "formDescription": "MLM Life  Survey",
+  "Questions": [
+    {
+      "questionText": "Have you received your contract?",
+      "questionType": "TEXT",
+      "Options": [
+        {
+          "optionText": "Yes",
+          "optionOrder": 1,
+          "triggerQuestion": {
+            "questionText": "Have you received your contract?",
+            "questionType": "TEXT"
+          }
+        }
+      ]
+    }
+  ]
+}

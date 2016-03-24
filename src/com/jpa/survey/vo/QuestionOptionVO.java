@@ -1,13 +1,19 @@
 package com.jpa.survey.vo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.jpa.survey.entity.QuestionOption;
 import com.jpa.survey.entity.SurveyQuestion;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class QuestionOptionVO {
 
+	@JsonIgnore
 	private long optionId;
 	private String optionText;
 	private int optionOrder;
+	@JsonProperty("triggerQuestion")
 	private SurveyQuestionVO triggerQuestionVO;
 
 	public QuestionOptionVO(QuestionOption option) {

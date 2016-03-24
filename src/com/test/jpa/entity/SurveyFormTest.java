@@ -4,9 +4,12 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
+import org.junit.Test;
+
 import com.jpa.survey.dao.SurveyFormDao;
 import com.jpa.survey.entity.SurveyForm;
 import com.jpa.survey.file.SurveyFormFileExporter;
+import com.jpa.survey.file.SurveyFormFileImporter;
 
 public class SurveyFormTest extends GenericTest<SurveyFormDao, SurveyForm> {
 
@@ -32,6 +35,7 @@ public class SurveyFormTest extends GenericTest<SurveyFormDao, SurveyForm> {
 		List<SurveyForm> forms = this.dao.findAll();
 	}
 	
+	@Test
 	public void testExport(){
 		SurveyFormFileExporter exporter=new SurveyFormFileExporter();
 		try {
@@ -39,5 +43,16 @@ public class SurveyFormTest extends GenericTest<SurveyFormDao, SurveyForm> {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public void testImport(){
+		SurveyFormFileImporter importer=new SurveyFormFileImporter();
+		try {
+			importer.importFile("/data/MLM_Life_Survey.json");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 }

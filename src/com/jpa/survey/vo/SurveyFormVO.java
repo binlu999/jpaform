@@ -2,17 +2,21 @@ package com.jpa.survey.vo;
 
 import java.util.Collection;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.jpa.survey.entity.SurveyContent;
 import com.jpa.survey.entity.SurveyForm;
 import com.jpa.survey.entity.SurveyQuestion;
 
 public class SurveyFormVO {
 
+	@JsonIgnore
 	private long surveyFormId;
 	private String companyCode;
 	private String marketArea;
 	private String prodCode;
 	private String formDescription;
+	@JsonProperty("Questions")
 	private java.util.List<SurveyQuestionVO> surveyQuestionVOs;
 
 	public SurveyFormVO(){

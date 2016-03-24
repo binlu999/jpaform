@@ -11,10 +11,14 @@ public enum QuestionType {
 		public int getValue(){
 			return value;
 		}
-	
-		public static void main(String[] args){
-			QuestionType a = QuestionType.valueOf("YESNO2");
-			int v = a.getValue();
-			v=+1;
+		
+		static public String parse(int v){
+			for(QuestionType type: QuestionType.values()){
+				if(type.getValue()==v){
+					return type.name();
+				}
+			}
+			return null;
 		}
+		
 }

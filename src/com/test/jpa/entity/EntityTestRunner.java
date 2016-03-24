@@ -22,7 +22,8 @@ public class EntityTestRunner {
 		
 		SurveyFormTest formTest = new SurveyFormTest();
 		//formTest.testFindAll();
-		formTest.testExport();
+		//formTest.testExport();
+		formTest.testImport();
 		
 		/*
 		SurveyForm form = formTest.find(6401);
