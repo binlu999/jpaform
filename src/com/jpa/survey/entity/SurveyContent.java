@@ -20,7 +20,7 @@ import com.jpa.survey.entity.id.SurveyContentID;
 @NamedQueries({
 	@NamedQuery(name = "SurveyContent.findAll", query = "SELECT f FROM SurveyContent f"),
 	@NamedQuery(name = "SurveyContent.deleteAll", query = "DELETE FROM SurveyContent f") })
-public class SurveyContent extends GenericEntity {
+public class SurveyContent extends GenericFormEntity {
 
 	@Id
 	@Column(name = "SURVEY_FORM_ID", insertable = false, updatable = false)

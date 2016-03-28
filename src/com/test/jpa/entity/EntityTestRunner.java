@@ -4,6 +4,7 @@ import java.util.Collection;
 
 import org.apache.commons.lang.StringUtils;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.jpa.survey.entity.QuestionOption;
 import com.jpa.survey.entity.SurveyContent;
 import com.jpa.survey.entity.SurveyForm;
@@ -13,15 +14,22 @@ public class EntityTestRunner {
 
 	public static void main(String[] args) throws InstantiationException,
 			IllegalAccessException {
-		QuestionOptionTest test=new QuestionOptionTest();
+		//QuestionOptionTest test=new QuestionOptionTest();
 		//new SurveyQuestionTest().testDeleteAll();
 		//(new SurveyContentTest()).testDeletAll();
 		
 		
+		SurveyQuestionTypeTest urveyQuestionTypeTest=new SurveyQuestionTypeTest();
+		try {
+			urveyQuestionTypeTest.testExport();
+		} catch (JsonProcessingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
-		SurveyFormTest formTest = new SurveyFormTest();
+		//SurveyFormTest formTest = new SurveyFormTest();
 		//formTest.testFindAll();
-		formTest.testExport();
+		//formTest.testExport();
 		//formTest.testImport();
 		//formTest.testDeleteAll();
 		

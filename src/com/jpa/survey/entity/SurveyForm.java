@@ -21,7 +21,7 @@ import javax.persistence.InheritanceType;
 @NamedQueries({
 		@NamedQuery(name = "SurveyForm.findAll", query = "SELECT f FROM SurveyForms f"),
 		@NamedQuery(name = "SurveyForm.deleteAll", query = "DELETE FROM SurveyForms f") })
-public class SurveyForm extends GenericEntity {
+public class SurveyForm extends GenericFormEntity {
 	@Id
 	@Column(name = "SURVEY_FORM_ID", nullable = false)
 	@GeneratedValue(strategy = GenerationType.AUTO)

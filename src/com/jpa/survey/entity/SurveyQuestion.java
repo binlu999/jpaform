@@ -12,6 +12,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -21,7 +23,7 @@ import javax.persistence.OneToMany;
 @NamedQueries({
 	@NamedQuery(name = "SurveyQuestion.findAll", query = "SELECT f FROM SurveyQuestions f"),
 	@NamedQuery(name = "SurveyQuestion.deleteAll", query = "DELETE FROM SurveyQuestions f") })
-public class SurveyQuestion extends GenericEntity{
+public class SurveyQuestion extends GenericFormEntity{
 	
 	@Id
 	@Column(name = "QUESTION_ID", nullable = false)
@@ -30,10 +32,12 @@ public class SurveyQuestion extends GenericEntity{
 	
 	@Column(name = "QUESTION_TEXT")
 	private String questionText;
-	
-	@Column(name = "QUESTION_TYPE_ID")
-	private int questionTypeId;
 
+
+	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.ALL })
+	@JoinColumn(name = "QUESTION_TYPE_ID")
+	private SurveyQuestionType surveyQuestionType;
+			
 	@OneToMany(mappedBy="surveyQuestion")
     private Collection<SurveyContent> surveyContents = new ArrayList<SurveyContent>();
 	
@@ -56,12 +60,12 @@ public class SurveyQuestion extends GenericEntity{
 		this.questionText = questionText;
 	}
 
-	public int getQuestionTypeId() {
-		return questionTypeId;
+	public SurveyQuestionType getSurveyQuestionType() {
+		return surveyQuestionType;
 	}
 
-	public void setQuestionTypeId(int questionTypeId) {
-		this.questionTypeId = questionTypeId;
+	public void setSurveyQuestionType(SurveyQuestionType surveyQuestionType) {
+		this.surveyQuestionType = surveyQuestionType;
 	}
 
 	public Collection<SurveyContent> getSurveyContents() {

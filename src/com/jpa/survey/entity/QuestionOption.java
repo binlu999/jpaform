@@ -14,7 +14,7 @@ import javax.persistence.OneToOne;
 
 @Entity(name = "QuestionOptions")
 @Inheritance(strategy = InheritanceType.JOINED)
-public class QuestionOption extends GenericEntity {
+public class QuestionOption extends GenericFormEntity {
 
 	@Id
 	@Column(name = "OPTION_ID", nullable = false)

@@ -25,7 +25,7 @@ public class SurveyFormDao extends EntityDao<SurveyForm>{
 	}
 
 	public List<SurveyForm> findAll() {
-		return super.runNamedTypedQuery("SurveyForm.findAll");
+		return super.runNamedTypedQueryForAll("SurveyForm.findAll");
 	}
 
 	public int deletAll() {

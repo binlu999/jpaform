@@ -1,12 +1,14 @@
 package com.jpa.survey.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 import com.jpa.survey.entity.GenericEntity;
+import com.jpa.survey.entity.GenericFormEntity;
 import com.jpa.survey.entity.SurveyForm;
 import com.jpa.util.EntityManagerUtil;
 
@@ -38,10 +40,32 @@ public abstract class EntityDao<T extends GenericEntity> {
 		return entity;
 	}
 	
-	protected List<T> runNamedTypedQuery(String namedQuery) {
+	private TypedQuery<T> createTypedQuery(String namedQuery,Map<String, String> parameters){
 		TypedQuery<T> query = this.em.createNamedQuery(namedQuery, clazz);
+		if(parameters!=null){
+			for(String key:parameters.keySet()){
+				query.setParameter(key, parameters.get(key));
+			}
+		}
+		return query;
+	}
+	
+	protected List<T> runNamedTypedQueryForAll(String namedQuery) {
+		TypedQuery<T> query = createTypedQuery(namedQuery,null);
 		List<T> list = query.getResultList();
 		return list;
+	}
+	
+	protected List<T> runNamedTypedQueryForAll(String namedQuery,Map<String, String> parameters) {
+		TypedQuery<T> query = createTypedQuery(namedQuery,parameters);
+		List<T> list = query.getResultList();
+		return list;
+	}
+	
+	protected T runNamedTypedQueryForSingle(String namedQuery,Map<String, String> parameters) {
+		TypedQuery<T> query = createTypedQuery(namedQuery,parameters);
+		T e = query.getSingleResult();
+		return e;
 	}
 
 	protected int runNamedQuery(String namedQuery) {

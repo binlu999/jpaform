@@ -2,6 +2,7 @@ package com.test.jpa.entity;
 
 import com.jpa.survey.dao.EntityDao;
 import com.jpa.survey.entity.GenericEntity;
+import com.jpa.survey.entity.GenericFormEntity;
 import com.jpa.survey.entity.SurveyForm;
 import com.jpa.util.EntityManagerUtil;
 
