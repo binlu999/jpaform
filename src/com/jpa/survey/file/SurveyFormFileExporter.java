@@ -1,6 +1,7 @@
 package com.jpa.survey.file;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
 
@@ -31,6 +32,9 @@ public class SurveyFormFileExporter {
 
 	public void export(SurveyFormVO formVO, String fileName)
 			throws JsonGenerationException, JsonMappingException, IOException {
-		mapper.writeValue(new File(fileName), formVO);
+		File output=new File(fileName);
+		FileOutputStream os=new FileOutputStream(output);
+		mapper.writeValue(os, formVO);
+		os.close();
 	}
 }

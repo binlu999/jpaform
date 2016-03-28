@@ -19,20 +19,22 @@ public class SurveyFormVO {
 	@JsonProperty("Questions")
 	private java.util.List<SurveyQuestionVO> surveyQuestionVOs;
 
-	public SurveyFormVO(){
+	public SurveyFormVO() {
 	}
-	
-	public SurveyFormVO(SurveyForm surveyForm){
+
+	public SurveyFormVO(SurveyForm surveyForm) {
 		this.surveyFormId = surveyForm.getSurveyFormId();
-		this.companyCode= surveyForm.getCompanyCode();
-		this.marketArea=surveyForm.getMarketArea();
-		this.prodCode=surveyForm.getProdCode();
-		this.formDescription=surveyForm.getFormDescription();
-		this.surveyQuestionVOs=new java.util.ArrayList<SurveyQuestionVO>();
+		this.companyCode = surveyForm.getCompanyCode();
+		this.marketArea = surveyForm.getMarketArea();
+		this.prodCode = surveyForm.getProdCode();
+		this.formDescription = surveyForm.getFormDescription();
+		this.surveyQuestionVOs = new java.util.ArrayList<SurveyQuestionVO>();
 		Collection<SurveyContent> contents = surveyForm.getSurveyContents();
-		for(SurveyContent content:contents){
+		for (SurveyContent content : contents) {
 			SurveyQuestion surveyQuestion = content.getSurveyQuestion();
-			SurveyQuestionVO surveyQuestionVO=new SurveyQuestionVO(surveyQuestion);
+			SurveyQuestionVO surveyQuestionVO = new SurveyQuestionVO(
+					surveyQuestion);
+			surveyQuestionVO.setDisplpayOrder(content.getOrder());
 			this.surveyQuestionVOs.add(surveyQuestionVO);
 		}
 	}
@@ -85,5 +87,28 @@ public class SurveyFormVO {
 			java.util.List<SurveyQuestionVO> surveyQuestionVOs) {
 		this.surveyQuestionVOs = surveyQuestionVOs;
 	}
-	
+
+	@JsonIgnore
+	public SurveyForm getEntity() {
+		SurveyForm surveyForm = new SurveyForm();
+		surveyForm.setSurveyFormId(this.surveyFormId);
+		surveyForm.setCompanyCode(this.companyCode);
+		surveyForm.setMarketArea(this.marketArea);
+		surveyForm.setProdCode(this.prodCode);
+		surveyForm.setFormDescription(this.formDescription);
+		if (this.surveyQuestionVOs != null) {
+			Collection<SurveyContent> surveyContents = new java.util.ArrayList<SurveyContent>();
+			for (SurveyQuestionVO surveyQuestionVO : surveyQuestionVOs) {
+				SurveyQuestion surveyQuestion = surveyQuestionVO.getEntity();
+				SurveyContent content = new SurveyContent();
+				content.setSurveyForm(surveyForm);
+				content.setSurveyQuestion(surveyQuestion);
+				content.setOrder(surveyQuestionVO.getDisplpayOrder());
+				surveyContents.add(content);
+			}
+			surveyForm.setSurveyContents(surveyContents);
+		}
+		return surveyForm;
+	}
+
 }

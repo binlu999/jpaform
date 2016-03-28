@@ -7,13 +7,15 @@
     {
       "questionText": "Have you received your contract?",
       "questionType": "TEXT",
+      "displpayOrder": 10,
       "Options": [
         {
           "optionText": "Yes",
           "optionOrder": 1,
           "triggerQuestion": {
-            "questionText": "Have you received your contract?",
-            "questionType": "TEXT"
+            "questionText": "When did you receive the contract?",
+            "questionType": "TEXT",
+            "displpayOrder": 0
           }
         }
       ]

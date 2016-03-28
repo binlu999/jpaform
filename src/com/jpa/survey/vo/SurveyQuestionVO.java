@@ -20,9 +20,14 @@ public class SurveyQuestionVO {
 	private String questionType;
 	@JsonProperty("Options")
 	private List<QuestionOptionVO> options;
+	private int displpayOrder;
+
+	public SurveyQuestionVO() {
+		super();
+	}
 
 	public SurveyQuestionVO(SurveyQuestion surveyQuestion) {
-		
+
 		this.questionId = surveyQuestion.getQuestionId();
 		this.questionText = surveyQuestion.getQuestionText();
 		this.questionType = QuestionType.parse(surveyQuestion
@@ -63,4 +68,40 @@ public class SurveyQuestionVO {
 		this.questionType = questionType;
 	}
 
+	public List<QuestionOptionVO> getOptions() {
+		return options;
+	}
+
+	public void setOptions(List<QuestionOptionVO> options) {
+		this.options = options;
+	}
+	
+	
+
+	public int getDisplpayOrder() {
+		return displpayOrder;
+	}
+
+	public void setDisplpayOrder(int displpayOrder) {
+		this.displpayOrder = displpayOrder;
+	}
+
+	@JsonIgnore
+	public SurveyQuestion getEntity() {
+		SurveyQuestion surveyQuestion = new SurveyQuestion();
+		surveyQuestion.setQuestionId(this.questionId);
+		surveyQuestion.setQuestionText(this.questionText);
+		surveyQuestion.setQuestionTypeId(QuestionType.valueOf(this.questionType).getValue());
+		
+		if(this.options!=null){
+			ArrayList<QuestionOption> questionOptions=new ArrayList<QuestionOption>();
+			for(QuestionOptionVO questionOptionVO : options){
+				QuestionOption questionOption = questionOptionVO.getEntity();
+				questionOption.setSurveyQuestion(surveyQuestion);
+				questionOptions.add(questionOption);
+			}
+			surveyQuestion.setQuestionOptions(questionOptions);
+		}
+		return surveyQuestion;
+	}
 }

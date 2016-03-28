@@ -2,20 +2,49 @@ package com.jpa.survey.file;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Collection;
 
 import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.core.JsonParser.Feature;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jpa.survey.dao.SurveyFormDao;
+import com.jpa.survey.entity.QuestionOption;
+import com.jpa.survey.entity.SurveyContent;
+import com.jpa.survey.entity.SurveyForm;
+import com.jpa.survey.entity.SurveyQuestion;
 import com.jpa.survey.vo.SurveyFormVO;
 
 public class SurveyFormFileImporter {
-	private SurveyFormDao surveyFormDao = new SurveyFormDao();
-	ObjectMapper mapper = new ObjectMapper();
-	
-	public void importFile(String resourcePath) throws JsonParseException, JsonMappingException, IOException{
-		InputStream input = this.getClass().getClassLoader().getResourceAsStream(resourcePath);
-		SurveyFormVO surveyFormVO=mapper.readValue(input, SurveyFormVO.class);
+	private SurveyFormDao surveyFormDao;
+	ObjectMapper mapper;
+
+	public SurveyFormFileImporter() {
+		surveyFormDao = new SurveyFormDao();
+		mapper = new ObjectMapper();
+		mapper.configure(Feature.AUTO_CLOSE_SOURCE, true);
+	}
+
+	public void importFile(String resourcePath) throws JsonParseException,
+			JsonMappingException, IOException {
+		InputStream input = this.getClass().getClassLoader()
+				.getResourceAsStream(resourcePath);
+		SurveyFormVO surveyFormVO = mapper.readValue(input, SurveyFormVO.class);
+		SurveyForm surveyForm=surveyFormVO.getEntity(); 
+		persit(surveyForm);
+	}
+
+	private void persit(SurveyForm surveyForm) {
+		Collection<SurveyContent> contents = surveyForm.getSurveyContents();
+		for(SurveyContent content:contents){
+			SurveyQuestion question = content.getSurveyQuestion();
+			Collection<QuestionOption> options = question.getQuestionOptions();
+			
+				
+			
+		}
+		surveyFormDao.save(surveyForm);
+		
 	}
 
 }

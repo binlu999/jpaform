@@ -16,6 +16,9 @@ public class QuestionOptionVO {
 	@JsonProperty("triggerQuestion")
 	private SurveyQuestionVO triggerQuestionVO;
 
+	public QuestionOptionVO(){
+		super();
+	}
 	public QuestionOptionVO(QuestionOption option) {
 		this.optionId=option.getOptionId();
 		this.optionText=option.getOptionText();
@@ -56,6 +59,18 @@ public class QuestionOptionVO {
 
 	public void setTriggerQuestionVO(SurveyQuestionVO triggerQuestionVO) {
 		this.triggerQuestionVO = triggerQuestionVO;
+	}
+	
+	@JsonIgnore
+	public QuestionOption getEntity() {
+		QuestionOption option=new QuestionOption();
+		option.setOptionId(this.optionId);
+		option.setOptionText(this.optionText);
+		option.setOptionOrder(this.optionOrder);
+		if(this.triggerQuestionVO!=null){
+			option.setTriggerQuestion(this.triggerQuestionVO.getEntity());
+		}
+		return option;
 	}	
 
 }
