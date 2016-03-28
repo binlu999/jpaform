@@ -35,16 +35,7 @@ public class SurveyFormFileImporter {
 	}
 
 	private void persit(SurveyForm surveyForm) {
-		Collection<SurveyContent> contents = surveyForm.getSurveyContents();
-		for(SurveyContent content:contents){
-			SurveyQuestion question = content.getSurveyQuestion();
-			Collection<QuestionOption> options = question.getQuestionOptions();
-			
-				
-			
-		}
 		surveyFormDao.save(surveyForm);
-		
 	}
 
 }

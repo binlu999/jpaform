@@ -26,4 +26,7 @@ public class SurveyQuestionTest extends
 		return e;
 	}
 
+	public void testDeleteAll(){
+		this.dao.deletAll();
+	}
 }

@@ -28,4 +28,7 @@ public class SurveyContentTest extends GenericTest<SurveyContentDao,SurveyConten
 		return null;
 	}
 
+	public void testDeletAll(){
+		this.dao.deletAll();
+	}
 }

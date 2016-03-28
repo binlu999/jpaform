@@ -13,7 +13,7 @@
 			<property name="openjpa.ConnectionDriverName"
 				value="com.microsoft.sqlserver.jdbc.SQLServerDriver" />
 			<property name="openjpa.ConnectionURL"
-				value="jdbc:sqlserver://localhost:59871;databaseName=anico" />
+				value="jdbc:sqlserver://txhous10pc691:59871;databaseName=anico" />
 			<property name="openjpa.ConnectionUserName" value="sa" />
 			<property name="openjpa.ConnectionPassword" value="wifecao911" />
 			<property name="openjpa.Multithreaded" value="true" />

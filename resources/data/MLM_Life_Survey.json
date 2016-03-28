@@ -15,7 +15,18 @@
           "triggerQuestion": {
             "questionText": "When did you receive the contract?",
             "questionType": "TEXT",
-            "displpayOrder": 0
+            "displpayOrder": 0,
+            "Options": [
+              {
+                "optionText": "Anyone called you?",
+                "optionOrder": 1,
+                "triggerQuestion": {
+                  "questionText": "What is the caller name?",
+                  "questionType": "TEXT",
+                  "displpayOrder": 0
+                }
+              }
+            ]
           }
         }
       ]

@@ -53,4 +53,9 @@ public class SurveyFormTest extends GenericTest<SurveyFormDao, SurveyForm> {
 		}
 		
 	}
+	
+	public void testDeleteAll(){
+		this.dao.deletAll();
+	}
+	
 }

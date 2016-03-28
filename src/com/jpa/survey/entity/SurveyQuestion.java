@@ -12,10 +12,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
 @Entity(name = "SurveyQuestions")
 @Inheritance(strategy=InheritanceType.JOINED)
+@NamedQueries({
+	@NamedQuery(name = "SurveyQuestion.findAll", query = "SELECT f FROM SurveyQuestions f"),
+	@NamedQuery(name = "SurveyQuestion.deleteAll", query = "DELETE FROM SurveyQuestions f") })
 public class SurveyQuestion extends GenericEntity{
 	
 	@Id

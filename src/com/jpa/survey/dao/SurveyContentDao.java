@@ -8,4 +8,8 @@ public class SurveyContentDao extends EntityDao<SurveyContent>{
 		super(SurveyContent.class);
 	}
 
+	public int deletAll() {
+		return super.runNamedQuery("SurveyContent.deleteAll");
+	}
+
 }

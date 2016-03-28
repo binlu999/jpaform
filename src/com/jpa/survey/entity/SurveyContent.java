@@ -9,12 +9,17 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 
 import com.jpa.survey.entity.id.SurveyContentID;
 
 @Entity(name = "SurveyContent")
 @Inheritance(strategy = InheritanceType.JOINED)
 @IdClass(SurveyContentID.class)
+@NamedQueries({
+	@NamedQuery(name = "SurveyContent.findAll", query = "SELECT f FROM SurveyContent f"),
+	@NamedQuery(name = "SurveyContent.deleteAll", query = "DELETE FROM SurveyContent f") })
 public class SurveyContent extends GenericEntity {
 
 	@Id
@@ -32,7 +37,7 @@ public class SurveyContent extends GenericEntity {
 	@JoinColumn(name = "SURVEY_FORM_ID")
 	private SurveyForm surveyForm;
 
-	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.ALL })
+	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.REMOVE, CascadeType.ALL })
 	@JoinColumn(name = "QUESTION_ID")
 	SurveyQuestion surveyQuestion;
 

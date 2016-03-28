@@ -14,16 +14,16 @@ public class EntityTestRunner {
 	public static void main(String[] args) throws InstantiationException,
 			IllegalAccessException {
 		QuestionOptionTest test=new QuestionOptionTest();
+		//new SurveyQuestionTest().testDeleteAll();
+		//(new SurveyContentTest()).testDeletAll();
 		
 		
-		//test.testAssignToQuestion();
- 
-		//testCreateContent();
 		
 		SurveyFormTest formTest = new SurveyFormTest();
 		//formTest.testFindAll();
-		//formTest.testExport();
-		formTest.testImport();
+		formTest.testExport();
+		//formTest.testImport();
+		//formTest.testDeleteAll();
 		
 		/*
 		SurveyForm form = formTest.find(6401);
