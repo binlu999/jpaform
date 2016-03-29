@@ -5,10 +5,10 @@
 	<persistence-unit name="formjpa">
 	    <class>com.jpa.survey.entity.GenericEntity</class>
 	    <class>com.jpa.survey.entity.GenericFormEntity</class>
+		<class>com.jpa.survey.entity.Question</class>
+		<class>com.jpa.survey.entity.QuestionOption</class>
 		<class>com.jpa.survey.entity.SurveyForm</class>
 		<class>com.jpa.survey.entity.SurveyQuestion</class>
-		<class>com.jpa.survey.entity.SurveyContent</class>
-		<class>com.jpa.survey.entity.QuestionOption</class>
 		<class>com.jpa.survey.entity.SurveyQuestionType</class>
 
 		<properties>

@@ -2,7 +2,7 @@ package com.jpa.survey.entity.id;
 
 import java.io.Serializable;
 
-public class SurveyContentID implements Serializable {
+public class SurveyQuestionID implements Serializable {
 	/**
 	 * 
 	 */
@@ -10,11 +10,11 @@ public class SurveyContentID implements Serializable {
 	private long surveyFormId;
 	private long questionId;
 
-	public SurveyContentID() {
+	public SurveyQuestionID() {
 
 	}
 
-	public SurveyContentID(long surveyFormId, long questionId) {
+	public SurveyQuestionID(long surveyFormId, long questionId) {
 		this.surveyFormId = surveyFormId;
 		this.questionId = questionId;
 	}
@@ -37,10 +37,10 @@ public class SurveyContentID implements Serializable {
 
 	@Override
 	public boolean equals(Object obj) {
-		return obj instanceof SurveyContentID
-				&& this.surveyFormId == ((SurveyContentID) obj)
+		return obj instanceof SurveyQuestionID
+				&& this.surveyFormId == ((SurveyQuestionID) obj)
 						.getSurveyFormId()
-				&& this.questionId == ((SurveyContentID) obj)
+				&& this.questionId == ((SurveyQuestionID) obj)
 						.getQuestionId();
 	}
 

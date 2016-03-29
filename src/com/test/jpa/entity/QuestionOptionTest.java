@@ -1,9 +1,9 @@
 package com.test.jpa.entity;
 
 import com.jpa.survey.dao.QuestionOptionDao;
-import com.jpa.survey.dao.SurveyQuestionDao;
+import com.jpa.survey.dao.QuestionDao;
 import com.jpa.survey.entity.QuestionOption;
-import com.jpa.survey.entity.SurveyQuestion;
+import com.jpa.survey.entity.Question;
 
 public class QuestionOptionTest extends
 		GenericTest<QuestionOptionDao, QuestionOption> {
@@ -18,14 +18,13 @@ public class QuestionOptionTest extends
 		QuestionOption e=new QuestionOption();
 		e.setOptionText("Yes");
 		e.setOptionOrder(1);
-		e.setTriggerFlag(true);
 		return e;
 	}
 	
 	public void testAssignToQuestion(){
-		SurveyQuestionDao questionDao=new SurveyQuestionDao();
-		SurveyQuestion question = questionDao.find(6451);
-		SurveyQuestion trigerQuestion = questionDao.find(6251);
+		QuestionDao questionDao=new QuestionDao();
+		Question question = questionDao.find(6451);
+		Question trigerQuestion = questionDao.find(6251);
 		
 		QuestionOption option = this.find(6501);
 		

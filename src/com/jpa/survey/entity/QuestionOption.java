@@ -12,7 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
-@Entity(name = "QuestionOptions")
+@Entity(name = "QUESTION_OPTIONS")
 @Inheritance(strategy = InheritanceType.JOINED)
 public class QuestionOption extends GenericFormEntity {
 
@@ -27,22 +27,19 @@ public class QuestionOption extends GenericFormEntity {
 	@Column(name = "OPTION_TEXT")
 	private String optionText;
 
-	@Column(name = "TRIGGER_FLAG")
-	private boolean triggerFlag;
+	@Column(name = "OPTION_ORDER")
+	private int optionOrder;
 
 	@Column(name = "TRIGGER_QUESTION_ID")
 	private long triggerQuestionId;
 
-	@Column(name = "OPTION_ORDER")
-	private int optionOrder;
-
 	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.ALL })
 	@JoinColumn(name = "QUESTION_ID")
-	private SurveyQuestion surveyQuestion;
+	private Question surveyQuestion;
 
 	@OneToOne(cascade = { CascadeType.PERSIST, CascadeType.ALL })
 	@JoinColumn(name = "TRIGGER_QUESTION_ID", referencedColumnName = "QUESTION_ID")
-	SurveyQuestion triggerQuestion;
+	Question triggerQuestion;
 
 	public long getOptionId() {
 		return optionId;
@@ -68,14 +65,6 @@ public class QuestionOption extends GenericFormEntity {
 		this.optionText = optionText;
 	}
 
-	public boolean isTriggerFlag() {
-		return triggerFlag;
-	}
-
-	public void setTriggerFlag(boolean triggerFlag) {
-		this.triggerFlag = triggerFlag;
-	}
-
 	public long getTriggerQuestionId() {
 		return triggerQuestionId;
 	}
@@ -92,21 +81,21 @@ public class QuestionOption extends GenericFormEntity {
 		this.optionOrder = optionOrder;
 	}
 
-	public SurveyQuestion getSurveyQuestion() {
+	public Question getSurveyQuestion() {
 		return surveyQuestion;
 	}
 
-	public void setSurveyQuestion(SurveyQuestion surveyQuestion) {
+	public void setSurveyQuestion(Question surveyQuestion) {
 		if (this.triggerQuestionId == 0 || surveyQuestion.getQuestionId() == 0
 				|| surveyQuestion.getQuestionId() != this.triggerQuestionId)
 			this.surveyQuestion = surveyQuestion;
 	}
 
-	public SurveyQuestion getTriggerQuestion() {
+	public Question getTriggerQuestion() {
 		return triggerQuestion;
 	}
 
-	public void setTriggerQuestion(SurveyQuestion triggerQuestion) {
+	public void setTriggerQuestion(Question triggerQuestion) {
 		if (this.questionId == 0 || triggerQuestion.getQuestionId() == 0
 				|| triggerQuestion.getQuestionId() != this.questionId)
 			this.triggerQuestion = triggerQuestion;

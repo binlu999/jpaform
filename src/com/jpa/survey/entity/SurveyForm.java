@@ -16,11 +16,11 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.InheritanceType;
 
-@Entity(name = "SurveyForms")
+@Entity(name = "SURVEY_FORMS")
 @Inheritance(strategy = InheritanceType.JOINED)
 @NamedQueries({
-		@NamedQuery(name = "SurveyForm.findAll", query = "SELECT f FROM SurveyForms f"),
-		@NamedQuery(name = "SurveyForm.deleteAll", query = "DELETE FROM SurveyForms f") })
+		@NamedQuery(name = "SURVEY_FORMS.findAll", query = "SELECT f FROM SURVEY_FORMS f"),
+		@NamedQuery(name = "SURVEY_FORMS.deleteAll", query = "DELETE FROM SURVEY_FORMS f") })
 public class SurveyForm extends GenericFormEntity {
 	@Id
 	@Column(name = "SURVEY_FORM_ID", nullable = false)
@@ -33,15 +33,15 @@ public class SurveyForm extends GenericFormEntity {
 	@Column(name = "MARKET_AREA")
 	private String marketArea;
 
-	@Column(name = "PROD_CODE")
+	@Column(name = "PRODUCT_CODE")
 	private String prodCode;
 
-	@Column(name = "FORM_DESCRIPTION")
+	@Column(name = "SURVEY_FORM_DESC")
 	private String formDescription;
 
 	@OneToMany(mappedBy = "surveyForm", cascade = { CascadeType.ALL,
 			CascadeType.PERSIST, CascadeType.REMOVE }, fetch = FetchType.EAGER)
-	private Collection<SurveyContent> surveyContents = new ArrayList<SurveyContent>();
+	private Collection<SurveyQuestion> surveyQuestions = new ArrayList<SurveyQuestion>();
 
 	public long getSurveyFormId() {
 		return surveyFormId;
@@ -83,12 +83,13 @@ public class SurveyForm extends GenericFormEntity {
 		this.formDescription = formDescription;
 	}
 
-	public Collection<SurveyContent> getSurveyContents() {
-		return surveyContents;
+	public Collection<SurveyQuestion> getSurveyQuestions() {
+		return surveyQuestions;
 	}
 
-	public void setSurveyContents(Collection<SurveyContent> surveyContents) {
-		this.surveyContents = surveyContents;
+	public void setSurveyQuestions(Collection<SurveyQuestion> surveyQuestions) {
+		this.surveyQuestions = surveyQuestions;
 	}
 
+	
 }

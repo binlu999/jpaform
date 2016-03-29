@@ -4,9 +4,9 @@ import java.util.Collection;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.jpa.survey.entity.SurveyContent;
-import com.jpa.survey.entity.SurveyForm;
 import com.jpa.survey.entity.SurveyQuestion;
+import com.jpa.survey.entity.SurveyForm;
+import com.jpa.survey.entity.Question;
 
 public class SurveyFormVO {
 
@@ -17,7 +17,7 @@ public class SurveyFormVO {
 	private String prodCode;
 	private String formDescription;
 	@JsonProperty("Questions")
-	private java.util.List<SurveyQuestionVO> surveyQuestionVOs;
+	private java.util.List<QuestionVO> questionVOs;
 
 	public SurveyFormVO() {
 	}
@@ -28,14 +28,13 @@ public class SurveyFormVO {
 		this.marketArea = surveyForm.getMarketArea();
 		this.prodCode = surveyForm.getProdCode();
 		this.formDescription = surveyForm.getFormDescription();
-		this.surveyQuestionVOs = new java.util.ArrayList<SurveyQuestionVO>();
-		Collection<SurveyContent> contents = surveyForm.getSurveyContents();
-		for (SurveyContent content : contents) {
-			SurveyQuestion surveyQuestion = content.getSurveyQuestion();
-			SurveyQuestionVO surveyQuestionVO = new SurveyQuestionVO(
-					surveyQuestion);
-			surveyQuestionVO.setDisplpayOrder(content.getOrder());
-			this.surveyQuestionVOs.add(surveyQuestionVO);
+		this.questionVOs = new java.util.ArrayList<QuestionVO>();
+		Collection<SurveyQuestion> sqs = surveyForm.getSurveyQuestions();
+		for (SurveyQuestion sq : sqs) {
+			Question q = sq.getQuestion();
+			QuestionVO surveyQuestionVO = new QuestionVO(q);
+			surveyQuestionVO.setDisplpayOrder(sq.getContentOrder());
+			this.questionVOs.add(surveyQuestionVO);
 		}
 	}
 
@@ -79,15 +78,6 @@ public class SurveyFormVO {
 		this.formDescription = formDescription;
 	}
 
-	public java.util.List<SurveyQuestionVO> getSurveyQuestionVOs() {
-		return surveyQuestionVOs;
-	}
-
-	public void setSurveyQuestionVOs(
-			java.util.List<SurveyQuestionVO> surveyQuestionVOs) {
-		this.surveyQuestionVOs = surveyQuestionVOs;
-	}
-
 	@JsonIgnore
 	public SurveyForm getEntity() {
 		SurveyForm surveyForm = new SurveyForm();
@@ -96,17 +86,17 @@ public class SurveyFormVO {
 		surveyForm.setMarketArea(this.marketArea);
 		surveyForm.setProdCode(this.prodCode);
 		surveyForm.setFormDescription(this.formDescription);
-		if (this.surveyQuestionVOs != null) {
-			Collection<SurveyContent> surveyContents = new java.util.ArrayList<SurveyContent>();
-			for (SurveyQuestionVO surveyQuestionVO : surveyQuestionVOs) {
-				SurveyQuestion surveyQuestion = surveyQuestionVO.getEntity();
-				SurveyContent content = new SurveyContent();
-				content.setSurveyForm(surveyForm);
-				content.setSurveyQuestion(surveyQuestion);
-				content.setOrder(surveyQuestionVO.getDisplpayOrder());
-				surveyContents.add(content);
+		if (this.questionVOs != null) {
+			Collection<SurveyQuestion> sqs = new java.util.ArrayList<SurveyQuestion>();
+			for (QuestionVO questionVO : questionVOs) {
+				Question q = questionVO.getEntity();
+				SurveyQuestion sq = new SurveyQuestion();
+				sq.setSurveyForm(surveyForm);
+				sq.setQuestion(q);
+				sq.setContentOrder(questionVO.getDisplpayOrder());
+				sqs.add(sq);
 			}
-			surveyForm.setSurveyContents(surveyContents);
+			surveyForm.setSurveyQuestions(sqs);
 		}
 		return surveyForm;
 	}

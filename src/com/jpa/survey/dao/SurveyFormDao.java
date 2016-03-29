@@ -2,34 +2,34 @@ package com.jpa.survey.dao;
 
 import java.util.Collection;
 import java.util.List;
-import com.jpa.survey.entity.SurveyContent;
-import com.jpa.survey.entity.SurveyForm;
 import com.jpa.survey.entity.SurveyQuestion;
+import com.jpa.survey.entity.SurveyForm;
+import com.jpa.survey.entity.Question;
 
 public class SurveyFormDao extends EntityDao<SurveyForm>{
-	SurveyQuestionDao surveyQuestionDao=new SurveyQuestionDao();
+	QuestionDao surveyQuestionDao=new QuestionDao();
 	public SurveyFormDao(){
 		super(SurveyForm.class);
 	}
 
 	@Override
 	public SurveyForm save(SurveyForm surveyForm) {
-		Collection<SurveyContent> contents = surveyForm.getSurveyContents();
-		for(SurveyContent content:contents){
-			SurveyQuestion question = content.getSurveyQuestion();
-			SurveyQuestion savedQuestion=surveyQuestionDao.save(question);
-			content.setSurveyQuestion(savedQuestion);
-			content.setQuestionId(savedQuestion.getQuestionId());
+		Collection<SurveyQuestion> sqs = surveyForm.getSurveyQuestions();
+		for(SurveyQuestion sq:sqs){
+			Question question = sq.getQuestion();
+			Question savedQuestion=surveyQuestionDao.save(question);
+			sq.setQuestion(savedQuestion);
+			sq.setQuestionId(savedQuestion.getQuestionId());
 		}
 		return super.save(surveyForm);
 	}
 
 	public List<SurveyForm> findAll() {
-		return super.runNamedTypedQueryForAll("SurveyForm.findAll");
+		return super.runNamedTypedQueryForAll("SURVEY_FORMS.findAll");
 	}
 
 	public int deletAll() {
-		return super.runNamedQuery("SurveyForm.deleteAll");
+		return super.runNamedQuery("SURVEY_FORMS.deleteAll");
 	}
 	
 }

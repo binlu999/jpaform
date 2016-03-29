@@ -8,11 +8,11 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.jpa.survey.entity.QuestionOption;
-import com.jpa.survey.entity.SurveyQuestion;
+import com.jpa.survey.entity.Question;
 import com.jpa.util.QuestionTypeUtil;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class SurveyQuestionVO {
+public class QuestionVO {
 
 	@JsonIgnore
 	private long questionId;
@@ -22,17 +22,17 @@ public class SurveyQuestionVO {
 	private List<QuestionOptionVO> options;
 	private int displpayOrder;
 	
-	public SurveyQuestionVO() {
+	public QuestionVO() {
 		super();
 	}
 
-	public SurveyQuestionVO(SurveyQuestion surveyQuestion) {
+	public QuestionVO(Question question) {
 
-		this.questionId = surveyQuestion.getQuestionId();
-		this.questionText = surveyQuestion.getQuestionText();
-		this.questionType = surveyQuestion.getSurveyQuestionType().getCode();
+		this.questionId = question.getQuestionId();
+		this.questionText = question.getQuestionText();
+		this.questionType = question.getSurveyQuestionType().getCode();
 
-		Collection<QuestionOption> options = surveyQuestion
+		Collection<QuestionOption> options = question
 				.getQuestionOptions();
 		if (options.size() > 0) {
 			this.options = new ArrayList<QuestionOptionVO>();
@@ -86,20 +86,20 @@ public class SurveyQuestionVO {
 	}
 
 	@JsonIgnore
-	public SurveyQuestion getEntity() {
-		SurveyQuestion surveyQuestion = new SurveyQuestion();
-		surveyQuestion.setQuestionId(this.questionId);
-		surveyQuestion.setQuestionText(this.questionText);
-		surveyQuestion.setSurveyQuestionType(QuestionTypeUtil.getSurveyQuestionType(this.questionType));
+	public Question getEntity() {
+		Question question = new Question();
+		question.setQuestionId(this.questionId);
+		question.setQuestionText(this.questionText);
+		question.setSurveyQuestionType(QuestionTypeUtil.getSurveyQuestionType(this.questionType));
 		if(this.options!=null){
 			ArrayList<QuestionOption> questionOptions=new ArrayList<QuestionOption>();
 			for(QuestionOptionVO questionOptionVO : options){
 				QuestionOption questionOption = questionOptionVO.getEntity();
-				questionOption.setSurveyQuestion(surveyQuestion);
+				questionOption.setSurveyQuestion(question);
 				questionOptions.add(questionOption);
 			}
-			surveyQuestion.setQuestionOptions(questionOptions);
+			question.setQuestionOptions(questionOptions);
 		}
-		return surveyQuestion;
+		return question;
 	}
 }

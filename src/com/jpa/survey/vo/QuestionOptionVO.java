@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.jpa.survey.entity.QuestionOption;
-import com.jpa.survey.entity.SurveyQuestion;
+import com.jpa.survey.entity.Question;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class QuestionOptionVO {
@@ -14,7 +14,7 @@ public class QuestionOptionVO {
 	private String optionText;
 	private int optionOrder;
 	@JsonProperty("triggerQuestion")
-	private SurveyQuestionVO triggerQuestionVO;
+	private QuestionVO triggerQuestionVO;
 
 	public QuestionOptionVO(){
 		super();
@@ -23,9 +23,9 @@ public class QuestionOptionVO {
 		this.optionId=option.getOptionId();
 		this.optionText=option.getOptionText();
 		this.optionOrder=option.getOptionOrder();
-		SurveyQuestion trigerQuestion = option.getTriggerQuestion();
+		Question trigerQuestion = option.getTriggerQuestion();
 		if(trigerQuestion!=null){
-			this.triggerQuestionVO=new SurveyQuestionVO(trigerQuestion);
+			this.triggerQuestionVO=new QuestionVO(trigerQuestion);
 		}
 	}
 
@@ -53,11 +53,11 @@ public class QuestionOptionVO {
 		this.optionOrder = optionOrder;
 	}
 
-	public SurveyQuestionVO getTriggerQuestionVO() {
+	public QuestionVO getTriggerQuestionVO() {
 		return triggerQuestionVO;
 	}
 
-	public void setTriggerQuestionVO(SurveyQuestionVO triggerQuestionVO) {
+	public void setTriggerQuestionVO(QuestionVO triggerQuestionVO) {
 		this.triggerQuestionVO = triggerQuestionVO;
 	}
 	
