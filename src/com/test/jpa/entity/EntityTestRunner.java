@@ -19,17 +19,19 @@ public class EntityTestRunner {
 		//(new SurveyContentTest()).testDeletAll();
 		
 		
-		SurveyQuestionTypeTest urveyQuestionTypeTest=new SurveyQuestionTypeTest();
+		SurveyQuestionTypeTest surveyQuestionTypeTest=new SurveyQuestionTypeTest();
 		try {
-			urveyQuestionTypeTest.testExport();
+			surveyQuestionTypeTest.testExport();
+			//surveyQuestionTypeTest.testImport();
+			
 		} catch (JsonProcessingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		//SurveyFormTest formTest = new SurveyFormTest();
+		SurveyFormTest formTest = new SurveyFormTest();
 		//formTest.testFindAll();
-		//formTest.testExport();
+		formTest.testExport();
 		//formTest.testImport();
 		//formTest.testDeleteAll();
 		

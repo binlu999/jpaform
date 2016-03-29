@@ -1,5 +1,6 @@
 package com.test.jpa.entity;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -8,6 +9,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jpa.survey.dao.SurveyQuestionTypeDao;
 import com.jpa.survey.entity.SurveyQuestionType;
+import com.jpa.survey.file.SurveyQuestionTypeFileImporter;
 import com.jpa.survey.vo.SurveyQuestionTypeVO;
 
 public class SurveyQuestionTypeTest extends
@@ -50,6 +52,15 @@ public class SurveyQuestionTypeTest extends
 		
 	}
 	
+	public void testImport(){
+		SurveyQuestionTypeFileImporter importer=new SurveyQuestionTypeFileImporter();
+		try {
+			importer.importQuestionType("data/Survey_Question_Types.json");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	public static void main(String[] args){
 		try {
 			SurveyQuestionTypeTest test=new SurveyQuestionTypeTest();

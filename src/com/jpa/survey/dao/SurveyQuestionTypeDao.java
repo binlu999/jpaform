@@ -15,7 +15,7 @@ public class SurveyQuestionTypeDao extends EntityDao<SurveyQuestionType> {
 		Map<String, String> parameters = new HashMap<String, String>();
 		parameters.put("code", code);
 		SurveyQuestionType quetionType = super.runNamedTypedQueryForSingle(
-				"SurveyQuestionType.findSingleBy", parameters);
+				"SUVEY_QUESTION_TYPES.findSingleBy", parameters);
 		return quetionType;
 	}
 

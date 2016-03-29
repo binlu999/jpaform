@@ -9,6 +9,7 @@
 		<class>com.jpa.survey.entity.SurveyQuestion</class>
 		<class>com.jpa.survey.entity.SurveyContent</class>
 		<class>com.jpa.survey.entity.QuestionOption</class>
+		<class>com.jpa.survey.entity.SurveyQuestionType</class>
 
 		<properties>
 			<property name="openjpa.ConnectionDriverName"

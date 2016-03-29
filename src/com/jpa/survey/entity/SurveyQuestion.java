@@ -35,7 +35,7 @@ public class SurveyQuestion extends GenericFormEntity{
 
 
 	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.ALL })
-	@JoinColumn(name = "QUESTION_TYPE_ID")
+	@JoinColumn(name = "QUESTION_TYPE_CODE")
 	private SurveyQuestionType surveyQuestionType;
 			
 	@OneToMany(mappedBy="surveyQuestion")

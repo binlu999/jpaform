@@ -2,37 +2,23 @@ package com.jpa.survey.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 
-@Entity(name = "SurveyQuestionTypes")
+@Entity(name = "SUVEY_QUESTION_TYPES")
 @NamedQueries({
-	@NamedQuery(name = "SurveyQuestionType.findAll", query = "SELECT f FROM SurveyForms f"),
-	@NamedQuery(name = "SurveyQuestionType.deleteAll", query = "DELETE FROM SurveyForms f"),
-	@NamedQuery(name = "SurveyQuestionType.findSingleBy", query = "SELECT f FROM SurveyQuestionTypes f WHERE f.code = :code ")})
+	@NamedQuery(name = "SUVEY_QUESTION_TYPES.findAll", query = "SELECT f FROM SUVEY_QUESTION_TYPES f"),
+	@NamedQuery(name = "SUVEY_QUESTION_TYPES.deleteAll", query = "DELETE FROM SUVEY_QUESTION_TYPES f"),
+	@NamedQuery(name = "SUVEY_QUESTION_TYPES.findSingleBy", query = "SELECT f FROM SUVEY_QUESTION_TYPES f WHERE f.code = :code ")})
 public class SurveyQuestionType extends GenericEntity{
 	
 	@Id
-	@Column(name = "QUESTION_TYPE_ID", nullable = false)
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long quetionTypeId;
-	
 	@Column(name = "QUESTION_TYPE_CODE", nullable = false)
 	private String code;
 	
-	@Column(name = "QUESTION_TYPE_CODE")
+	@Column(name = "QUESTION_TYPE_DESC")
 	private String description;
-
-	public long getQuetionTypeId() {
-		return quetionTypeId;
-	}
-
-	public void setQuetionTypeId(long quetionTypeId) {
-		this.quetionTypeId = quetionTypeId;
-	}
 
 	public String getCode() {
 		return code;

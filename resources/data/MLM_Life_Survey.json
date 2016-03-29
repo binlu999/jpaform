@@ -6,7 +6,7 @@
   "Questions": [
     {
       "questionText": "Have you received your contract?",
-      "questionType": "TEXT",
+      "questionType": "TV",
       "displpayOrder": 10,
       "Options": [
         {
@@ -14,7 +14,7 @@
           "optionOrder": 1,
           "triggerQuestion": {
             "questionText": "When did you receive the contract?",
-            "questionType": "TEXT",
+            "questionType": "TV",
             "displpayOrder": 0,
             "Options": [
               {
@@ -22,7 +22,7 @@
                 "optionOrder": 1,
                 "triggerQuestion": {
                   "questionText": "What is the caller name?",
-                  "questionType": "TEXT",
+                  "questionType": "TV",
                   "displpayOrder": 0
                 }
               }
