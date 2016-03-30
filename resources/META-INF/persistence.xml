@@ -10,6 +10,8 @@
 		<class>com.jpa.survey.entity.SurveyForm</class>
 		<class>com.jpa.survey.entity.SurveyQuestion</class>
 		<class>com.jpa.survey.entity.SurveyQuestionType</class>
+		<class>com.jpa.survey.entity.Submitter</class>
+		<class>com.jpa.survey.entity.SubmitterAnswer</class>
 
 		<properties>
 			<property name="openjpa.ConnectionDriverName"

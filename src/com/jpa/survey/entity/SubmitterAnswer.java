@@ -19,7 +19,6 @@ public class SubmitterAnswer extends GenericEntity {
 
 	@Id
 	@Column(name = "SURVEY_SUBMITTER_ID", nullable = false)
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long surveySubmitterId;
 
 	@Id
@@ -31,17 +30,17 @@ public class SubmitterAnswer extends GenericEntity {
 	private long questionId;
 
 	@Id
-	@Column(name = "OPTION_ID", insertable = false, updatable = false)
+	@Column(name = "OPTION_ID", columnDefinition="default '0'", insertable = false, updatable = false)
 	private long optionId;
 
 	@Column(name = "ANSWER_TEXT", insertable = false, updatable = false)
-	private long answerText;
+	private String answerText;
 
 	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.ALL })
 	@JoinColumn(name = "SURVEY_SUBMITTER_ID")
 	private Submitter submitter;
 
-	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.ALL })
+	@ManyToOne()
 	@JoinColumn(name = "SURVEY_FORM_ID")
 	private SurveyForm surveyForm;
 
@@ -103,11 +102,11 @@ public class SubmitterAnswer extends GenericEntity {
 		this.optionId = optionId;
 	}
 
-	public long getAnswerText() {
+	public String getAnswerText() {
 		return answerText;
 	}
 
-	public void setAnswerText(long answerText) {
+	public void setAnswerText(String answerText) {
 		this.answerText = answerText;
 	}
 

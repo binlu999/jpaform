@@ -8,14 +8,18 @@ public class SubmitterAnswerID implements Serializable {
 	private long surveyFormId;
 	private long surveySubmitterId;
 	private long questionId;
-	private long optionIdId;
+	private long optionId;
 
+	public SubmitterAnswerID(){
+		
+	}
+	
 	public SubmitterAnswerID(long surveyFormId, long surveySubmitterId,
 			long questionId, long optionIdId) {
 		this.surveyFormId = surveyFormId;
 		this.surveySubmitterId = surveySubmitterId;
 		this.questionId = questionId;
-		this.optionIdId = optionIdId;
+		this.optionId = optionIdId;
 	}
 
 	public long getSurveyFormId() {
@@ -42,12 +46,13 @@ public class SubmitterAnswerID implements Serializable {
 		this.questionId = questionId;
 	}
 
-	public long getOptionIdId() {
-		return optionIdId;
+
+	public long getOptionId() {
+		return optionId;
 	}
 
-	public void setOptionIdId(long optionIdId) {
-		this.optionIdId = optionIdId;
+	public void setOptionId(long optionId) {
+		this.optionId = optionId;
 	}
 
 	@Override
@@ -59,13 +64,13 @@ public class SubmitterAnswerID implements Serializable {
 				&& this.surveySubmitterId == ((SubmitterAnswerID) obj)
 						.getSurveySubmitterId()
 				&& this.questionId == ((SubmitterAnswerID) obj).getQuestionId()
-				&& this.optionIdId == ((SubmitterAnswerID) obj).getOptionIdId();
+				&& this.optionId == ((SubmitterAnswerID) obj).getOptionId();
 	}
 
 	@Override
 	public int hashCode() {
 		return (int) (this.surveyFormId + this.surveySubmitterId
-				+ this.questionId + this.optionIdId);
+				+ this.questionId + this.optionId);
 	}
 
 }

@@ -4,7 +4,7 @@ import com.jpa.survey.entity.Submitter;
 
 public class SubmitterDao extends EntityDao<Submitter>{
 
-	protected SubmitterDao() {
+	public SubmitterDao() {
 		super(Submitter.class);
 	}
 

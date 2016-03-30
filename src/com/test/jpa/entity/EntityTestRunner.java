@@ -18,6 +18,8 @@ public class EntityTestRunner {
 		//new SurveyQuestionTest().testDeleteAll();
 		//(new SurveyContentTest()).testDeletAll();
 		
+		SubmitterTest submitterTest=new SubmitterTest();
+		submitterTest.testAnswer();
 		
 		SurveyQuestionTypeTest surveyQuestionTypeTest=new SurveyQuestionTypeTest();
 		try {
