@@ -18,7 +18,7 @@ import com.jpa.survey.entity.id.SurveyQuestionID;
 public class SubmitterAnswer extends GenericEntity {
 
 	@Id
-	@Column(name = "SURVEY_SUBMITTER_ID", nullable = false)
+	@Column(name = "SURVEY_SUBMITTER_ID", insertable = false, updatable = false)
 	private long surveySubmitterId;
 
 	@Id
@@ -30,10 +30,10 @@ public class SubmitterAnswer extends GenericEntity {
 	private long questionId;
 
 	@Id
-	@Column(name = "OPTION_ID", columnDefinition="default '0'", insertable = false, updatable = false)
+	@Column(name = "OPTION_ID",  insertable = false, updatable = false)
 	private long optionId;
 
-	@Column(name = "ANSWER_TEXT", insertable = false, updatable = false)
+	@Column(name = "ANSWER_TEXT")
 	private String answerText;
 
 	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.ALL })
@@ -44,13 +44,11 @@ public class SubmitterAnswer extends GenericEntity {
 	@JoinColumn(name = "SURVEY_FORM_ID")
 	private SurveyForm surveyForm;
 
-	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.REMOVE,
-			CascadeType.ALL })
+	@ManyToOne()
 	@JoinColumn(name = "QUESTION_ID")
 	Question question;
 
-	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.REMOVE,
-			CascadeType.ALL })
+	@ManyToOne()
 	@JoinColumn(name = "OPTION_ID")
 	QuestionOption option;
 

@@ -22,7 +22,14 @@ public abstract class EntityDao<T extends GenericEntity> {
 
 	public T save(T entity) {
 		em.getTransaction().begin();
-		// em.persist(entity);
+		//em.persist(entity);
+		
+		boolean has = em.contains(entity);
+		if(has){
+			System.out.println("has=true");
+		}else{
+			System.out.println("has=false");
+		}
 		T e=em.merge(entity);
 		em.getTransaction().commit();
 		return e;
@@ -30,10 +37,11 @@ public abstract class EntityDao<T extends GenericEntity> {
 
 	public T merge(T entity) {
 		em.getTransaction().begin();
-		em.merge(entity);
+		T e=em.merge(entity);
 		em.getTransaction().commit();
-		return entity;
+		return e;
 	}
+	
 
 	public T find(long id) {
 		T entity = em.find(clazz, id);

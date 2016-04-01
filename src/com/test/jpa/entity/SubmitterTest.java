@@ -15,9 +15,9 @@ import com.jpa.survey.entity.SurveyForm;
 import com.jpa.survey.entity.SurveyQuestion;
 
 public class SubmitterTest extends GenericTest<SubmitterDao, Submitter> {
-	
-	private SurveyFormDao surveyFormDao=new SurveyFormDao();
-	private SubmitterAnswerDao submitterAnswerDao=new SubmitterAnswerDao();
+
+	private SurveyFormDao surveyFormDao = new SurveyFormDao();
+	private SubmitterAnswerDao submitterAnswerDao = new SubmitterAnswerDao();
 
 	protected SubmitterTest() throws InstantiationException,
 			IllegalAccessException {
@@ -27,9 +27,9 @@ public class SubmitterTest extends GenericTest<SubmitterDao, Submitter> {
 	@Override
 	public Submitter creatOne() {
 		List<SurveyForm> forms = surveyFormDao.findAll();
-		if(forms!=null && forms.size()>0){
-			SurveyForm form=forms.get(0);
-			Submitter submitter=new Submitter();
+		if (forms != null && forms.size() > 0) {
+			SurveyForm form = forms.get(0);
+			Submitter submitter = new Submitter();
 			submitter.setSurveyForm(form);
 			submitter.setBestTimeToCall("AM");
 			submitter.setBranchOfficeCode("BRCH");
@@ -49,47 +49,48 @@ public class SubmitterTest extends GenericTest<SubmitterDao, Submitter> {
 		return null;
 	}
 
-	public void testAnswer(){
+	public void testAnswer() {
 		Submitter submitter = this.creatOne();
-		submitter=this.save(submitter);
+		submitter = this.save(submitter);
+		long id = submitter.getSurveySubmitterId();
 		
 		SurveyForm form = submitter.getSurveyForm();
 		Collection<SurveyQuestion> surveyQuestions = form.getSurveyQuestions();
-		
-		for(SurveyQuestion sq:surveyQuestions){
+
+		for (SurveyQuestion sq : surveyQuestions) {
 			Question question = sq.getQuestion();
-			answerQuestion(submitter,form,question);
+			answerQuestion(submitter, form, question);
 		}
-		
+
 	}
 
-	private void answerQuestion(Submitter submitter, SurveyForm form,
+	private SubmitterAnswer answerQuestion(Submitter submitter, SurveyForm form,
 			Question question) {
 		Collection<QuestionOption> options = question.getQuestionOptions();
-		SubmitterAnswer answer=new SubmitterAnswer();
+		
+		QuestionOption option = options.iterator().next();
+		
+		Question triggerQuestion = option.getTriggerQuestion();
+		if (triggerQuestion != null) {
+			answerQuestion(submitter, form, triggerQuestion);
+
+		}
+		SubmitterAnswer answer = new SubmitterAnswer();
 		answer.setSubmitter(submitter);
 		answer.setSurveySubmitterId(submitter.getSurveySubmitterId());
 		answer.setSurveyForm(form);
+		answer.setSurveyFormId(form.getSurveyFormId());
 		answer.setQuestion(question);
-		
-		if(options==null || options.size()==0){
-			QuestionOption dump=new QuestionOption();
-			dump.setOptionId(0);
-			answer.setOptionId(0);
-			answer.setOption(dump);
-			answer.setAnswerText("TXT:"+question.getQuestionText());
-		}else{
-			QuestionOption option = options.iterator().next();
-			answer.setOption(option);
-			answer.setAnswerText("OPT:"+option.getOptionText());
-			Question triggerQuestion = option.getTriggerQuestion();
-			if(triggerQuestion!=null){
-				answerQuestion(submitter, form,triggerQuestion);
-			}
-		}
-		
-		submitterAnswerDao.save(answer);
+		answer.setQuestionId(question.getQuestionId());
+		answer.setOption(option);
+		answer.setOptionId(option.getOptionId());
+		answer.setAnswerText("OPT:" + option.getOptionText());
+
+
+		System.out.println("Before save answer");
+		SubmitterAnswer newAns = submitterAnswerDao.save(answer);
+		System.out.println("After save answer");
+		return newAns;
 	}
-	
-	
+
 }

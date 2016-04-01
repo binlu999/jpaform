@@ -23,7 +23,13 @@
                 "triggerQuestion": {
                   "questionText": "What is the caller name?",
                   "questionType": "TV",
-                  "displpayOrder": 0
+                  "displpayOrder": 10,
+                  "Options": [
+                    {
+                      "optionText": "Type your answer here",
+                      "optionOrder": 1
+                    }
+                  ]
                 }
               }
             ]
